@@ -132,17 +132,17 @@ function criaFlappyBird() {
       { spriteX: 0, spriteY: 26, }, // asa no meio 
     ],
     frameAtual: 0,
-    atualizaOFrameAtual() {     
+    atualizaOFrameAtual(){
+      //quantos frames cada sprite vai permanecer exibido
       const intervaloDeFrames = 10;
-      const passouOIntervalo = frames % intervaloDeFrames === 0;
-      console.log('passouOIntervalo', passouOIntervalo)
+      //quantas vezes a asa se mexeu desde o começo do jogo
+      const mexidasDeAsa = Math.floor(frames / intervaloDeFrames);
+      //quantidade de posições possíveis
+      const posicoes = flappyBird.movimentos.length
 
-      if(passouOIntervalo) {
-        const baseDoIncremento = 1;
-        const incremento = baseDoIncremento + flappyBird.frameAtual;
-        const baseRepeticao = flappyBird.movimentos.length;
-        flappyBird.frameAtual = incremento % baseRepeticao
-      }
+      //a medida que mexidaDeAsa for aumentando, frameAtual vai mudando em loop, de acordo com o resto de posicoes
+      flappyBird.frameAtual = mexidasDeAsa % posicoes;
+    },
         // console.log('[incremento]', incremento);
         // console.log('[baseRepeticao]',baseRepeticao);
         // console.log('[frame]', incremento % baseRepeticao);
